@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.72b0d4e847b1307332d96ab637809004.js"
+  "/precache-manifest.a79cbacff106fd948265cd9cb19a9811.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "sugerencia-pit-dashboard"});

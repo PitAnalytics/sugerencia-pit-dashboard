@@ -11,7 +11,7 @@
         </div>
         <br>        
         <div class="row">
-          <table class="table">
+          <table class="table table-bordered">
             <thead>
               <th>Numero</th>
               <th>Nomnbre</th>
@@ -102,7 +102,7 @@ export default {
     loadProveedor(proveedor){
       this.setProveedor(proveedor);
       this.setLevel(1);
-      this.requestPeps(proveedor);
+      this.requestPeps({proveedor:proveedor,text:''});
     },
     textSearch(text){
       this.requestProveedores(text);

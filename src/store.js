@@ -57,13 +57,14 @@ export default new Vuex.Store({
       });
 
     },
-    requestPeps({commit},proveedor,text=''){
+    requestPeps({commit},params){
+      console.log(params);
       let url;
-      if(text===''){
-        url=`http://35.196.24.250/sugerencia-pit-api/public/pep/search/${proveedor}`;
+      if(params.text===''){
+        url=`http://35.196.24.250/sugerencia-pit-api/public/pep/search/${params.proveedor}`;
       }
       else{
-        url=`http://35.196.24.250/sugerencia-pit-api/public/pep/search/${proveedor}/${text}`;
+        url=`http://35.196.24.250/sugerencia-pit-api/public/pep/search/${params.proveedor}/${params.text}`;
       }
       axios.get(url)
       .then(response=>{
@@ -71,13 +72,14 @@ export default new Vuex.Store({
       });
 
     },
-    requestPedidos({commit},pep,text=''){
+    requestPedidos({commit},params){
+      console.log(params);
       let url;
-      if(text===''){
-        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${pep}`;
+      if(params.text===''){
+        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${params.pep}`;
       }
       else{
-        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${pep}/${text}`;
+        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${params.pep}/${params.text}`;
       }
       axios.get(url)
       .then(response=>{

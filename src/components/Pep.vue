@@ -5,18 +5,16 @@
         <h5 class="card-title">Peps</h5>
         <br>
         <div class="row">
-          <div class="col">
+          <div class="col-lg-10">
             <input type="text" v-model="text" @keyup="textSearch(text)">
           </div>
-          <div class="col">
-            <button class="btn">
-              RETURN
-            </button>
+          <div class="col-lg-2">
+            <button class="btn btn-success" @click="setLevel(0)">PROVEEDORES</button>
           </div>
         </div>
         <br>
         <div class="row">
-          <table class="table">
+          <table class="table table-bordered">
             <thead>
               <tr>
                 <th>Codigo</th>
@@ -100,9 +98,6 @@ export default {
         hidden=true;
       }
       return hidden;
-    },
-    proveedorParam(){
-      return this.proveedor;
     }
   },
   mounted(){
@@ -114,10 +109,10 @@ export default {
     loadPep(pep){
       this.setLevel(2);
       this.setPep(pep);
-      this.requestPedidos(pep);
+      this.requestPedidos({pep:pep,text:''});
     },
     textSearch(text){
-      this.requestPeps(this.proveedor,text);
+      this.requestPeps({proveedor:this.proveedor,text:text});
     }
   }
 }

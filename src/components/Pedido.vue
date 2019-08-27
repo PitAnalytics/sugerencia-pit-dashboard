@@ -7,8 +7,11 @@
         <h5 class="card-title">Pedidos</h5>
         <br>
         <div class="row">
-          <div class="col">
-            <input type="text" v-model="text">
+          <div class="col-lg-10">
+            <input type="text" v-model="text" @keyup="textSearch(text)">
+          </div>
+          <div class="col-lg-2">
+            <button class="btn btn-success" @click="setLevel(1)">PEPS</button>
           </div>
         </div>
         <br>
@@ -100,8 +103,11 @@ export default {
 
   },
   methods:{
-    ...Vuex.mapMutations(['setPedidos']),
-    ...Vuex.mapActions(['requestPedidos'])
+    ...Vuex.mapMutations(['setPedidos','setLevel']),
+    ...Vuex.mapActions(['requestPedidos']),
+    textSearch(text){
+      this.requestPedidos({pep:this.pep,text:text})
+    }
   }
 }
 </script>
