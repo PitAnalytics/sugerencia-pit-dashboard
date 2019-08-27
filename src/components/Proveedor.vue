@@ -1,45 +1,45 @@
 <template>
   <div class="proveedor">
-    <div class="card mt-4" v-bind:hidden="hidden">
-      <div class="card-body">
+    <div class="card border-info mt-4" v-bind:hidden="hidden">
+      <div class="card-body text-info">
         <h5 class="card-title">Proveedores</h5>
         <br>
         <div class="row">
-          <div class="col">
-            <input type="text" v-model="text" @keyup="textSearch(text)">
+          <div class="col-lg-12">
+            <input class="form-control" type="text" v-model="text" @keyup="textSearch(text)">
           </div>
         </div>
-        <br>        
+        <br>
         <div class="row">
-          <table class="table table-bordered">
-            <thead>
-              <th>Numero</th>
-              <th>Nomnbre</th>
-              <th>Subtotal 2018</th>
-              <th>Subtotal 2019</th>
-              <th>Peps</th>
-            </thead>
-            <tbody>
-              <tr v-for="(item,index) in proveedorTable" v-bind:key="index">
-                <td>{{item.numeroProveedor}}</td>
-                <td>{{item.nombreProveedor}}</td>
-                <td>{{item.subtotal2018}}</td>
-                <td>{{item.subtotal2019}}</td>
-                <td>
-                  <a class="btn btn-info" @click="loadProveedor(item.numeroProveedor)">DRILLDOWN</a>
-                <td/>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th></th>
-                <th>TOTALES</th>
-                <th>{{total2018}}</th>
-                <th>{{total2019}}</th>
-                <th></th>
-              </tr>
-            </tfoot>
-          </table>
+          <div class="col">
+            <table class="table">
+              <thead>
+                <th>Numero</th>
+                <th>Nombre</th>
+                <th>Subtotal 2018</th>
+                <th>Subtotal 2019</th>
+                <th>Peps</th>
+              </thead>
+              <tbody>
+                <tr v-for="(item,index) in proveedorTable" v-bind:key="index">
+                  <td class="cell-1">{{item.numeroProveedor}}</td>
+                  <td class="cell-2">{{item.nombreProveedor}}</td>
+                  <td class="cell-3">{{item.subtotal2018}}</td>
+                  <td class="cell-4">{{item.subtotal2019}}</td>
+                  <td class="cell-5"><a class="btn btn-info" @click="loadProveedor(item.numeroProveedor)"><span>DRILLDOWN</span><i class="fa fa-caret-down ml-2"></i></a></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th>TOTALES</th>
+                  <th>{{total2018}}</th>
+                  <th>{{total2019}}</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
         
       </div>
@@ -228,9 +228,29 @@ export default {
 <style scoped>
 input{
   border-radius:0px;
+  width: 250px;
 }
 .btn{
   border-radius:0px;
-  width:120px;
+  width:150px;
+  color: aliceblue;
+}
+.cell-1{
+  width: 250px;
+}
+.cell-2{
+  width: 500px;
+}
+.cell-3{
+  width: 250px;
+}
+.cell-4{
+  width: 250px;
+}
+.cell-5{
+  color: aliceblue;
+}
+.card{
+  border-radius:0px;
 }
 </style>

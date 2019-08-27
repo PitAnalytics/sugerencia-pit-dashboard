@@ -1,48 +1,51 @@
 <template>
   <div class="proveedor">
-    <div class="card my-4" v-bind:hidden="hidden">
+    <div class="card my-4 border-info" v-bind:hidden="hidden">
 
-      <div class="card-body">
+      <div class="card-body text-info">
 
         <h5 class="card-title">Pedidos</h5>
         <br>
         <div class="row">
-          <div class="col-lg-9">
-            <input type="text" v-model="text" @keyup="textSearch(text)">
+          <div class="col-lg-10">
+            <input class="form-control" type="text" v-model="text" @keyup="textSearch(text)">
           </div>
-          <div class="col-lg-3">
-            <button class="btn btn-success btn-block" @click="setLevel(1)">BACK</button>
+          <div class="col-lg-2">
+            <button class="btn btn-success btn-block" @click="setLevel(1)"><i class="fa fa-caret-left mx-4"><span>BACK</span></i></button>
           </div>
         </div>
         <br>
         <div class="row">
-          <table class="table table-bordered">
-            <thead>
-              <th>NUmero Pedido</th>
-              <th>Concepto</th>
-              <th>Subtotal 2018</th>
-              <th>Subtotal 2019</th>
-            </thead>
-            <tbody>
-              <tr v-for="(item,index) in pedidosTable" v-bind:key="index">
-                <td>{{item.numeroPedido}}</td>                
-                <td>{{item.conceptoPedido}}</td>                
-                <td>{{item.subtotal2018}}</td>                
-                <td>{{item.subtotal2019}}</td>                
-              </tr>
-            </tbody>
+          <div class="col">
+            <table class="table">
+              <thead>
+                <th>NUmero Pedido</th>
+                <th>Concepto</th>
+                <th>Subtotal 2018</th>
+                <th>Subtotal 2019</th>
+              </thead>
+              <tbody>
+                <tr v-for="(item,index) in pedidosTable" v-bind:key="index">
+                  <td>{{item.numeroPedido}}</td>                
+                  <td>{{item.conceptoPedido}}</td>                
+                  <td>{{item.subtotal2018}}</td>                
+                  <td>{{item.subtotal2019}}</td>                
+                </tr>
+              </tbody>
 
-            <tfoot>
-              <tr>
-                <th></th>
-                <th>TOTALES</th>
-                <th>{{total2018}}</th>
-                <th>{{total2019}}</th>
-              </tr>
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th>TOTALES</th>
+                  <th>{{total2018}}</th>
+                  <th>{{total2019}}</th>
+                </tr>
 
-            </tfoot>
+              </tfoot>
 
-          </table>
+            </table>
+          </div>
+
         </div>
         
       </div>
@@ -65,7 +68,7 @@ export default {
     }
   },
   computed:{
-    ...Vuex.mapState(['pedidos','pep','level']),
+    ...Vuex.mapState(['pedidos','pep','level','proveedor']),
     conteo(){
       let conteo=0;
       this.pedidos.forEach(item => {
@@ -221,9 +224,34 @@ export default {
 <style scoped>
 input{
   border-radius:0px;
+  width: 250px;
 }
 .btn{
   border-radius:0px;
-  width: 100px;
+}
+.cell-1{
+  width: 250px;
+}
+.cell-2{
+  width: 750px;
+}
+.cell-3{
+  width: 250px;
+}
+.cell-4{
+  width: 250px;
+}
+.cell-5{
+  color: aliceblue;
+}
+.btn-info{
+  width:150px;
+  color:aliceblue;
+}
+.btn-success{
+  width:150px;
+}
+.card{
+  border-radius:0px;
 }
 </style>

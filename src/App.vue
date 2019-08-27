@@ -5,6 +5,12 @@
 
       <div class="row">
         <div class="col">
+          <Encabezado/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
           <Proveedor></Proveedor>
         </div>
       </div>
@@ -36,11 +42,12 @@ import {mapActions} from 'vuex';
 import Proveedor from './components/Proveedor.vue';
 import Pep from './components/Pep.vue';
 import Pedido from './components/Pedido.vue';
+import Encabezado from './components/Encabezado.vue';
 
 export default {
   name: 'app',
   components: {
-    Proveedor,Pep,Pedido
+    Proveedor,Pep,Pedido,Encabezado
   },
   data:()=>{
     return{

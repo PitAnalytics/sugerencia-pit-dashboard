@@ -1,51 +1,56 @@
 <template>
   <div class="proveedor">
-    <div class="card mt-4" v-bind:hidden="hidden">
-      <div class="card-body">
-
+    <div class="card mt-4 border-info" v-bind:hidden="hidden">
+      <div class="card-body text-info">
         <h5 class="card-title">Peps</h5>
         <br>
         <div class="row">
-          <div class="col-lg-9">
-            <input type="text" v-model="text" @keyup="textSearch(text)">
+          <div class="col-lg-10">
+            <input class="form-control" type="text" v-model="text" @keyup="textSearch(text)">
           </div>
-          <div class="col-lg-3">
-            <button class="btn btn-success btn-block" @click="setLevel(0)">BACK</button>
+          <div class="col-lg-2 align-self-end">
+            <button class="btn btn-success back" @click="setLevel(0)"><i class="fa fa-caret-left mr-4"><span>BACK</span></i></button>
           </div>
         </div>
         <br>
+        <br>
         <div class="row">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Codigo</th>
-                <th>Descripcion</th>
-                <th>Subtotal 2018</th>
-                <th>Subtotal 2019</th>
-                <th>Pedidos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item,index) in pepTable" v-bind:key="index">
-                <td>{{item.codigoPep}}</td>
-                <td>{{item.descripcionPep}}</td>
-                <td>{{item.subtotal2018}}</td>
-                <td>{{item.subtotal2019}}</td>
-                <td><a class="btn btn-info" @click="loadPep(item.codigoPep)">DRILLDOWN</a></td>
-              </tr>
-            </tbody>
+          <div class="col">
+            <table class="table">
 
-            <tfoot>
-              <tr>
-                <th></th>
-                <th>TOTALES</th>
-                <th>{{total2018}}</th>
-                <th>{{total2019}}</th>
-                <th></th>
-              </tr>
-            </tfoot>
+              <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Descripcion</th>
+                  <th>Subtotal 2018</th>
+                  <th>Subtotal 2019</th>
+                  <th>Pedidos</th>
+                </tr>
+              </thead>
 
-          </table>
+              <tbody>
+                <tr v-for="(item,index) in pepTable" v-bind:key="index">
+                  <td class="cell-1">{{item.codigoPep}}</td>
+                  <td class="cell-2">{{item.descripcionPep}}</td>
+                  <td class="cell-3">{{item.subtotal2018}}</td>
+                  <td class="cell-4">{{item.subtotal2019}}</td>
+                  <td class="cell-5"><a class="btn btn-info" @click="loadPep(item.codigoPep)"><span>DRILLDOWN</span><i class="fa fa-caret-down ml-2"></i></a></td>
+                </tr>
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th>TOTALES</th>
+                  <th>{{total2018}}</th>
+                  <th>{{total2019}}</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+
+            </table>
+          </div>
+
         </div>
         
       </div>
@@ -238,9 +243,38 @@ export default {
 <style scoped>
 input{
   border-radius:0px;
+  width: 250px;
 }
 .btn{
   border-radius:0px;
-  width: 100px;
+}
+.cell-1{
+  width: 250px;
+}
+.cell-2{
+  width: 750px;
+}
+.cell-3{
+  width: 250px;
+}
+.cell-4{
+  width: 250px;
+}
+.cell-5{
+  color: aliceblue;
+}
+.btn-info{
+  width:150px;
+  color:aliceblue;
+}
+.btn-success{
+  width:150px;
+  color:aliceblue;
+}
+i{
+  font-size: 15px;
+}
+.card{
+  border-radius:0px;
 }
 </style>
