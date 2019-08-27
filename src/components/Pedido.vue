@@ -7,11 +7,11 @@
         <h5 class="card-title">Pedidos</h5>
         <br>
         <div class="row">
-          <div class="col-lg-10">
+          <div class="col-lg-9">
             <input type="text" v-model="text" @keyup="textSearch(text)">
           </div>
-          <div class="col-lg-2">
-            <button class="btn btn-success" @click="setLevel(1)">PEPS</button>
+          <div class="col-lg-3">
+            <button class="btn btn-success btn-block" @click="setLevel(1)">BACK</button>
           </div>
         </div>
         <br>
@@ -24,7 +24,7 @@
               <th>Subtotal 2019</th>
             </thead>
             <tbody>
-              <tr v-for="(item,index) in pedidos" v-bind:key="index">
+              <tr v-for="(item,index) in pedidosTable" v-bind:key="index">
                 <td>{{item.numeroPedido}}</td>                
                 <td>{{item.conceptoPedido}}</td>                
                 <td>{{item.subtotal2018}}</td>                
@@ -74,18 +74,80 @@ export default {
       return conteo;
     },
     total2018(){
+
+      function stdToEng (num){
+        let float = parseFloat(num);
+        let number = float.toFixed(2);
+        let components=number.split(".",2);
+        let int = components[0];
+        let dec = components[1];
+        let result = []
+        for (let i = 0; i < int.length; i++) {
+          const j = (int.length-i)-1;
+          const k = i+1;
+          const c = int.substr(j,1);
+          if((k%3===0)&&(j!==0)&&(int.substr(0,1)!=="-")){
+            result.push(c);
+            result.push(",");
+          }
+          else{
+            result.push(c);
+          }
+        }
+        let numEng='';
+        for (let i = 0; i < result.length; i++) {
+          const j=(result.length-i)-1;
+          const c=result[j];
+          numEng+=c;
+        }
+        numEng+=".";
+        numEng+=dec;
+        return numEng;
+      }
+
       let total=0;
       this.pedidos.forEach(item => {
         total+=item.subtotal2018;
       });
-      return total;
+      return `$${stdToEng(total)}`;
     },
     total2019(){
+
+      function stdToEng (num){
+        let float = parseFloat(num);
+        let number = float.toFixed(2);
+        let components=number.split(".",2);
+        let int = components[0];
+        let dec = components[1];
+        let result = []
+        for (let i = 0; i < int.length; i++) {
+          const j = (int.length-i)-1;
+          const k = i+1;
+          const c = int.substr(j,1);
+          if((k%3===0)&&(j!==0)&&(int.substr(0,1)!=="-")){
+            result.push(c);
+            result.push(",");
+          }
+          else{
+            result.push(c);
+          }
+        }
+        let numEng='';
+        for (let i = 0; i < result.length; i++) {
+          const j=(result.length-i)-1;
+          const c=result[j];
+          numEng+=c;
+        }
+        numEng+=".";
+        numEng+=dec;
+        return numEng;
+      }
+
       let total=0;
       this.pedidos.forEach(item => {
         total+=item.subtotal2019;
       });
-      return total;
+      return `$${stdToEng(total)}`;
     },
     hidden(){
       let hidden;
@@ -96,17 +158,61 @@ export default {
         hidden=true;
       }
       return hidden;
+    },
+    pedidosTable(){
+
+      function stdToEng (num){
+        let float = parseFloat(num);
+        let number = float.toFixed(2);
+        let components=number.split(".",2);
+        let int = components[0];
+        let dec = components[1];
+        let result = []
+        for (let i = 0; i < int.length; i++) {
+          const j = (int.length-i)-1;
+          const k = i+1;
+          const c = int.substr(j,1);
+          if((k%3===0)&&(j!==0)&&(int.substr(0,1)!=="-")){
+            result.push(c);
+            result.push(",");
+          }
+          else{
+            result.push(c);
+          }
+        }
+        let numEng='';
+        for (let i = 0; i < result.length; i++) {
+          const j=(result.length-i)-1;
+          const c=result[j];
+          numEng+=c;
+        }
+        numEng+=".";
+        numEng+=dec;
+        return numEng;
+      }
+
+      let table=[];
+      this.pedidos.forEach(item=>{
+        const line={
+          numeroPedido:item.numeroPedido,
+          conceptoPedido:item.conceptoPedido,
+          subtotal2018:`$${stdToEng(item.subtotal2018)}`,
+          subtotal2019:`$${stdToEng(item.subtotal2019)}`
+        }
+        table.push(line);
+      });
+      return table;
     }
+
   },
   mounted(){
-
 
   },
   methods:{
     ...Vuex.mapMutations(['setPedidos','setLevel']),
     ...Vuex.mapActions(['requestPedidos']),
     textSearch(text){
-      this.requestPedidos({pep:this.pep,text:text})
+      this.requestPedidos({pep:this.pep,text:text,proveedor:this.proveedor})
     }
   }
 }

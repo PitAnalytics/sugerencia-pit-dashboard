@@ -20,12 +20,14 @@
               <th>Peps</th>
             </thead>
             <tbody>
-              <tr v-for="(item,index) in proveedores" v-bind:key="index">
+              <tr v-for="(item,index) in proveedorTable" v-bind:key="index">
                 <td>{{item.numeroProveedor}}</td>
                 <td>{{item.nombreProveedor}}</td>
                 <td>{{item.subtotal2018}}</td>
                 <td>{{item.subtotal2019}}</td>
-                <td><a class="btn btn-info" @click="loadProveedor(item.numeroProveedor)">DRILLDOWN</a><td/>
+                <td>
+                  <a class="btn btn-info" @click="loadProveedor(item.numeroProveedor)">DRILLDOWN</a>
+                <td/>
               </tr>
             </tbody>
             <tfoot>
@@ -69,18 +71,80 @@ export default {
       return conteo;
     },
     total2018(){
+
+      function stdToEng (num){
+        let float = parseFloat(num);
+        let number = float.toFixed(2);
+        let components=number.split(".",2);
+        let int = components[0];
+        let dec = components[1];
+        let result = []
+        for (let i = 0; i < int.length; i++) {
+          const j = (int.length-i)-1;
+          const k = i+1;
+          const c = int.substr(j,1);
+          if((k%3===0)&&(j!==0)&&(int.substr(0,1)!=="-")){
+            result.push(c);
+            result.push(",");
+          }
+          else{
+            result.push(c);
+          }
+        }
+        let numEng='';
+        for (let i = 0; i < result.length; i++) {
+          const j=(result.length-i)-1;
+          const c=result[j];
+          numEng+=c;
+        }
+        numEng+=".";
+        numEng+=dec;
+        return numEng;
+      }
+
       let total=0;
       this.proveedores.forEach(item => {
         total+=item.subtotal2018;
       });
-      return total;
+      return `$${stdToEng(total)}`;
     },
     total2019(){
+
+      function stdToEng (num){
+        let float = parseFloat(num);
+        let number = float.toFixed(2);
+        let components=number.split(".",2);
+        let int = components[0];
+        let dec = components[1];
+        let result = []
+        for (let i = 0; i < int.length; i++) {
+          const j = (int.length-i)-1;
+          const k = i+1;
+          const c = int.substr(j,1);
+          if((k%3===0)&&(j!==0)&&(int.substr(0,1)!=="-")){
+            result.push(c);
+            result.push(",");
+          }
+          else{
+            result.push(c);
+          }
+        }
+        let numEng='';
+        for (let i = 0; i < result.length; i++) {
+          const j=(result.length-i)-1;
+          const c=result[j];
+          numEng+=c;
+        }
+        numEng+=".";
+        numEng+=dec;
+        return numEng;
+      }
+
       let total=0;
       this.proveedores.forEach(item => {
         total+=item.subtotal2019;
       });
-      return total;
+      return `$${stdToEng(total)}`;
     },
     hidden(){
       let hidden;
@@ -91,6 +155,57 @@ export default {
         hidden=true;
       }
       return hidden;
+    },
+    proveedorTable(){
+
+      function stdToEng (num){
+
+        let float = parseFloat(num);
+        let number = float.toFixed(2);
+        let components=number.split(".",2);
+        let int = components[0];
+        let dec = components[1];
+        let result = []
+
+        for (let i = 0; i < int.length; i++) {
+          const j = (int.length-i)-1;
+          const k = i+1;
+          const c = int.substr(j,1);
+          if((k%3===0)&&(j!==0)&&(int.substr(0,1)!=="-")){
+            result.push(c);
+            result.push(",");
+          }
+          else{
+            result.push(c);
+          }
+        }
+        let numEng='';
+        for (let i = 0; i < result.length; i++) {
+          const j=(result.length-i)-1;
+          const c=result[j];
+          numEng+=c;
+        }
+        numEng+=".";
+        numEng+=dec;
+        return numEng;
+      }
+
+      let table=[];
+      this.proveedores.forEach(item=>{
+
+        const line={
+          numeroProveedor:item.numeroProveedor,
+          nombreProveedor:item.nombreProveedor,
+          subtotal2018:`$${stdToEng(item.subtotal2018)}`,
+          subtotal2019:`$${stdToEng(item.subtotal2019)}`
+        }
+
+        table.push(line);
+
+      });
+
+      return table;
+
     }
   },
   mounted(){

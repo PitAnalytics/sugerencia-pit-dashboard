@@ -1,7 +1,6 @@
 <template>
   <div id="app">
 
-
     <div class="container-fluid">
 
       <div class="row">
@@ -9,17 +8,21 @@
           <Proveedor></Proveedor>
         </div>
       </div>
+
       <div class="row">
         <div class="col">
           <Pep></Pep>
         </div>
       </div>
+
       <div class="row">
         <div class="col">
           <Pedido></Pedido>
         </div>
       </div>
+
     </div>
+    
   </div>
 </template>
 

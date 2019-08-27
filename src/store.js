@@ -43,7 +43,7 @@ export default new Vuex.Store({
   },
   actions: {
     requestProveedores({commit},text=''){
-      
+      console.log(text);
       let url;
       if(text===''){
         url=`http://35.196.24.250/sugerencia-pit-api/public/proveedor/search`;
@@ -51,6 +51,7 @@ export default new Vuex.Store({
       else{
         url=`http://35.196.24.250/sugerencia-pit-api/public/proveedor/search/${text}`;
       }
+      console.log(url);
       axios.get(url)
       .then(response=>{
         commit('setProveedores',response.data);
@@ -76,10 +77,10 @@ export default new Vuex.Store({
       console.log(params);
       let url;
       if(params.text===''){
-        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${params.pep}`;
+        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${params.pep}/${params.proveedor}`;
       }
       else{
-        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${params.pep}/${params.text}`;
+        url=`http://35.196.24.250/sugerencia-pit-api/public/pedido/search/${params.pep}/${params.proveedor}/${params.text}`;
       }
       axios.get(url)
       .then(response=>{
